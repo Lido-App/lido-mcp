@@ -1,0 +1,57 @@
+{
+  "name": "@lido-app/mcp-server",
+  "version": "0.1.0",
+  "description": "MCP server for the Lido data extraction API — extract structured data from documents and check extractor usage from any MCP-compatible agent.",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "lido",
+    "data-extraction",
+    "llm",
+    "claude",
+    "ai"
+  ],
+  "license": "MIT",
+  "author": "Lido",
+  "homepage": "https://github.com/Lido-App/lido-mcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lido-App/lido-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Lido-App/lido-mcp/issues"
+  },
+  "type": "module",
+  "bin": {
+    "lido-mcp": "dist/index.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "yarn@3.4.1",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
