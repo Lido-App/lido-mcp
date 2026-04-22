@@ -32,7 +32,7 @@ Any other MCP client that supports stdio servers works the same way — launch `
 
 ## Usage
 
-On first use, ask the agent to sign you in — it will call `authenticate`, which opens a browser form on `http://127.0.0.1` where you paste your API key. The key is saved per-project under `<project-root>/.lido-mcp/credentials.json` (automatically gitignored) and reused on future runs.
+On first use, ask the agent to sign you in — it will call `authenticate`, which opens a browser to the Lido authorization page where you paste your API key. The key is saved per-project under `<project-root>/.lido-mcp/credentials.json` (automatically gitignored) and reused on future runs.
 
 Then just ask things like:
 
