@@ -1,11 +1,13 @@
 # Lido MCP Server
 
-MCP server for the [Lido](https://lido.app) data extraction API. Exposes four tools to any MCP-compatible agent:
+MCP server for the [Lido](https://www.lido.app/) data extraction API. Exposes these tools to any MCP-compatible agent:
 
 - `authenticate` — sign in on first use (opens a browser to paste your Lido API key)
 - `extract_file_data` — extract structured data from a document (PDF, image, etc.) into named columns
 - `extraction_tips` — advanced refinement techniques the agent can consult when an extraction doesn't come out right
 - `extractor_usage` — check your Lido page quota
+- `open_billing_page` — open the Lido billing page to manage your plan or add credits
+- `open_lido_app` — open the Lido web app to work with your data in the full UI
 
 ## Install
 

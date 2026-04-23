@@ -18,7 +18,7 @@ export const authenticateSchema = {
     .max(900)
     .optional()
     .describe(
-      "Maximum seconds to wait for the user to authorize the MCP session in their browser. Defaults to 300.",
+      "Maximum seconds to wait for the user to authorize the MCP session in their browser. Defaults to 900 (15 minutes), which matches the server-side session TTL.",
     ),
 };
 
@@ -43,7 +43,7 @@ export async function runAuthenticate(
     );
   }
 
-  const timeoutMs = (args.timeoutSeconds ?? 300) * 1_000;
+  const timeoutMs = (args.timeoutSeconds ?? 900) * 1_000;
   const session = await startAuthSession();
   const supportsUrlElicitation =
     !!mcp.server.getClientCapabilities()?.elicitation?.url;
