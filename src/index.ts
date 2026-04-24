@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { createRequire } from "node:module";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { UrlElicitationRequiredError } from "@modelcontextprotocol/sdk/types.js";
@@ -18,8 +19,13 @@ import {
   extractorUsageSchema,
   runExtractorUsage,
 } from "./tools/extractor-usage.js";
+import { openAppSchema, runOpenApp } from "./tools/open-app.js";
+import { openBillingSchema, runOpenBilling } from "./tools/open-billing.js";
 
-const VERSION = "0.1.0";
+const pkg = createRequire(import.meta.url)("../package.json") as {
+  version: string;
+};
+const VERSION = pkg.version;
 
 type ToolResult = {
   content: Array<{ type: "text"; text: string }>;
@@ -63,6 +69,20 @@ async function main() {
     "Query your Lido extractor usage quota: pages remaining, pages used in a date range, and optional per-user breakdown. Returns the response as JSON inline.",
     extractorUsageSchema,
     (args) => wrapErrors(() => runExtractorUsage(provider, args)),
+  );
+
+  mcp.tool(
+    "open_billing_page",
+    "Open the user's Lido billing page in a browser. Call this when the user asks to manage their subscription, add credits, or update payment details — and also when an extraction fails because they're out of credits, so they can top up and retry.",
+    openBillingSchema,
+    () => wrapErrors(() => runOpenBilling(mcp)),
+  );
+
+  mcp.tool(
+    "open_lido_app",
+    "Open the Lido web app in a browser. Call this when the user wants to use Lido's full UI — e.g. to run extractions interactively, manage saved extractors, review historical jobs, or access features not exposed through these MCP tools. Learn more about Lido at https://www.lido.app/.",
+    openAppSchema,
+    () => wrapErrors(() => runOpenApp(mcp)),
   );
 
   const transport = new StdioServerTransport();

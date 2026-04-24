@@ -1,6 +1,8 @@
 {
   "name": "@lido-app/mcp-server",
-  "version": "0.1.0",
+  "mcpName": "io.github.Lido-App/lido-mcp",
+  "//": "When bumping `version`, also update `version` and `packages[0].version` in server.json — the MCP registry publish requires them to match.",
+  "version": "0.1.1",
   "description": "MCP server for the Lido data extraction API — extract structured data from documents and check extractor usage from any MCP-compatible agent.",
   "keywords": [
     "mcp",

@@ -1,7 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { basename } from "node:path";
-
-const BASE_URL = "https://sheets.lido.app/api/v1";
+import { getApiBaseUrl } from "./config.js";
 
 export type ExtractConfig = {
   columns: string[];
@@ -62,7 +61,7 @@ export class LidoClient {
     );
     form.append("config", JSON.stringify(config));
 
-    const res = await fetch(`${BASE_URL}/extract-file-data`, {
+    const res = await fetch(`${getApiBaseUrl()}/extract-file-data`, {
       method: "POST",
       headers: { Authorization: `Bearer ${this.apiKey}` },
       body: form,
@@ -80,7 +79,7 @@ export class LidoClient {
   }
 
   async getJobResult(jobId: string): Promise<JobResult> {
-    const url = new URL(`${BASE_URL}/job-result`);
+    const url = new URL(`${getApiBaseUrl()}/job-result`);
     url.searchParams.set("jobId", jobId);
 
     const res = await fetch(url, {
@@ -122,7 +121,7 @@ export class LidoClient {
   }
 
   async getExtractorUsage(query: UsageQuery = {}): Promise<UsageResponse> {
-    const url = new URL(`${BASE_URL}/extractor-usage`);
+    const url = new URL(`${getApiBaseUrl()}/extractor-usage`);
     if (query.startDate) url.searchParams.set("start_date", query.startDate);
     if (query.endDate) url.searchParams.set("end_date", query.endDate);
     if (query.byUser) url.searchParams.set("by_user", "true");
